@@ -17,12 +17,29 @@ function custom_icons_register_icons() {
 	$registry = WP_Icons_Registry::get_instance();
 
 	foreach ( $icons as $icon ) {
-		$registry->register(
+		if ( ! method_exists( $registry, 'is_registered' ) || ! $registry->is_registered( $icon['name'] ) ) {
+			custom_icons_register_icon_via_reflection( $registry, $icon );
+		}
+	}
+}
+
+function custom_icons_register_icon_via_reflection( $registry, $icon ) {
+	try {
+		$method = new ReflectionMethod( $registry, 'register' );
+
+		if ( PHP_VERSION_ID < 80100 ) {
+			$method->setAccessible( true );
+		}
+
+		$method->invoke(
+			$registry,
 			$icon['name'],
 			array(
 				'label'   => $icon['label'],
 				'content' => $icon['content'],
 			)
 		);
+	} catch ( Throwable $e ) {
+		return;
 	}
 }
