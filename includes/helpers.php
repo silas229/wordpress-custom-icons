@@ -152,11 +152,6 @@ function custom_icons_get_registered_icons_data() {
 			continue;
 		}
 
-		$svg = wp_kses( $svg, custom_icons_allowed_svg_html() );
-		if ( ! $svg ) {
-			continue;
-		}
-
 		$label = get_the_title( $post->ID );
 		$slug  = (string) get_post_meta( $post->ID, CUSTOM_ICONS_META_SLUG, true );
 
