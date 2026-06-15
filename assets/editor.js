@@ -1,8 +1,15 @@
 import { addFilter } from '@wordpress/hooks';
-import { InspectorControls, LinkControl } from '@wordpress/block-editor';
+import {
+	BlockControls,
+	LinkControl,
+	__experimentalLinkControl as ExperimentalLinkControl,
+} from '@wordpress/block-editor';
 import { createHigherOrderComponent } from '@wordpress/compose';
-import { Fragment } from '@wordpress/element';
-import { PanelBody, TextControl } from '@wordpress/components';
+import { Fragment, useState } from '@wordpress/element';
+import { ToolbarButton, Popover, TextControl } from '@wordpress/components';
+import { link, linkOff } from '@wordpress/icons';
+
+const CustomIconsLinkControl = ExperimentalLinkControl || LinkControl;
 
 const customIcons = {
 	loaded: false,
@@ -72,49 +79,79 @@ addFilter(
 	}
 );
 
-const withIconLinkInspectorControls = createHigherOrderComponent( ( BlockEdit ) => {
+const withIconLinkBlockControls = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
 		if ( props.name !== 'core/icon' ) {
 			return <BlockEdit { ...props } />;
 		}
 
-		const { attributes, setAttributes } = props;
+		const { attributes, setAttributes, isSelected } = props;
 		const { url = '', linkTarget = '', rel = '' } = attributes;
+		const [ isLinkUIOpen, setIsLinkUIOpen ] = useState( false );
+
+		const openLinkUI = () => setIsLinkUIOpen( true );
+		const closeLinkUI = () => setIsLinkUIOpen( false );
 
 		return (
 			<Fragment>
 				<BlockEdit { ...props } />
-				<InspectorControls>
-					<PanelBody title="Link" initialOpen={ true }>
-						<LinkControl
-							value={ {
-								url,
-								opensInNewTab: linkTarget === '_blank',
-							} }
-							onChange={ ( nextValue ) => {
-								setAttributes( {
-									url: nextValue?.url || '',
-									linkTarget: nextValue?.opensInNewTab ? '_blank' : '',
-								} );
-							} }
+				{ isSelected && (
+					<BlockControls group="block">
+						<ToolbarButton
+							icon={ link }
+							label="Link setzen"
+							onClick={ openLinkUI }
+							isPressed={ isLinkUIOpen }
 						/>
-						<TextControl
-							label="Rel"
-							value={ rel }
-							onChange={ ( value ) => setAttributes( { rel: value } ) }
-							help="Optional link relationship, e.g. nofollow"
-						/>
-					</PanelBody>
-				</InspectorControls>
+						{ url && (
+							<ToolbarButton
+								icon={ linkOff }
+								label="Link entfernen"
+								onClick={ () => {
+									setAttributes( {
+										url: '',
+										linkTarget: '',
+										rel: '',
+									} );
+									closeLinkUI();
+								} }
+							/>
+						) }
+					</BlockControls>
+				) }
+				{ isSelected && isLinkUIOpen && CustomIconsLinkControl && (
+					<Popover position="bottom center" onClose={ closeLinkUI }>
+						<div style={ { width: '320px', padding: '16px' } }>
+							<CustomIconsLinkControl
+								value={ {
+									url,
+									opensInNewTab: linkTarget === '_blank',
+								} }
+								onChange={ ( nextValue ) => {
+									setAttributes( {
+										url: nextValue?.url || '',
+										linkTarget: nextValue?.opensInNewTab ? '_blank' : '',
+									} );
+								} }
+							/>
+							<TextControl
+								label="Rel"
+								value={ rel }
+								onChange={ ( value ) => setAttributes( { rel: value } ) }
+								help="Optional link relationship, e.g. nofollow"
+							/>
+						</div>
+					</Popover>
+				) }
 			</Fragment>
 		);
 	};
-}, 'withIconLinkInspectorControls' );
+}, 'withIconLinkBlockControls' );
 
 addFilter(
 	'editor.BlockEdit',
-	'custom-icons/add-icon-link-inspector-controls',
-	withIconLinkInspectorControls
+	'custom-icons/add-icon-link-block-controls',
+	withIconLinkBlockControls
 );
 
 addFilter(
