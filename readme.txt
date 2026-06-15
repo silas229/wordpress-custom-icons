@@ -5,7 +5,7 @@ Tags: block-editor, gutenberg, icons, svg, media-library
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 0.3.0
+Stable tag: 0.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,6 +19,7 @@ Features include:
 
 * A **Custom Icons** management screen under **Design**
 * Selecting SVG files from the Media Library
+* Uploading SVG files to the Media Library
 * Default icon names based on the media item's title
 * Optional custom slugs for icon names
 * Registration of icons for use with the `core/icon` block
@@ -30,14 +31,11 @@ Icons are registered with names like:
 
 These icons can then be used in the WordPress Icon block.
 
-Note: this plugin does not enable SVG uploads by itself. If your site does not already allow SVG uploads, you will need an additional plugin or custom code for that.
-
 == Installation ==
 
 1. Upload the plugin files to the `/wp-content/plugins/custom-icons` directory, or install the plugin through the WordPress plugins screen.
 2. Activate the plugin through the **Plugins** screen in WordPress.
-3. Make sure SVG uploads are allowed on your WordPress installation.
-4. Go to **Design > Custom Icons** to add icons.
+3. Go to **Design > Custom Icons** to add icons.
 
 == Frequently Asked Questions ==
 
@@ -51,9 +49,13 @@ Only users with the `switch_themes` capability can view and manage Custom Icons.
 
 = Does this plugin enable SVG uploads? =
 
-No. The plugin can select existing SVG files from the Media Library, but it does not enable SVG uploads by itself.
+Yes. The plugin adds SVG to the allowed Media Library upload types so SVG icons can be uploaded and selected directly.
 
 == Changelog ==
+
+= 0.4.0 =
+* Enabled SVG uploads in the Media Library by allow-listing SVG files.
+* Updated the plugin FAQ to document SVG upload support.
 
 = 0.3.0 =
 * Centralized capability definitions.
