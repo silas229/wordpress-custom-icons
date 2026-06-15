@@ -1,5 +1,6 @@
 === Custom Icons ===
 Contributors: silas229
+Donate link: https://github.com/sponsors/silas229
 Tags: block-editor, gutenberg, icons, svg, media-library
 Requires at least: 6.6
 Tested up to: 6.8
