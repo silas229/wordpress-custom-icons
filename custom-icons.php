@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Custom Icons
  * Description: Adds a "Custom Icons" admin screen under Design and registers SVG icons for the core/icon block from Media Library attachments.
- * Version: 0.2.0
+ * Version: 0.3.0
  * Author: silas229
  * Text Domain: custom-icons
  */
@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CUSTOM_ICONS_VERSION', '0.2.0' );
+define( 'CUSTOM_ICONS_VERSION', '0.3.0' );
 define( 'CUSTOM_ICONS_FILE', __FILE__ );
 define( 'CUSTOM_ICONS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CUSTOM_ICONS_URL', plugin_dir_url( __FILE__ ) );
