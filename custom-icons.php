@@ -21,6 +21,8 @@ define( 'CUSTOM_ICONS_META_ATTACHMENT_ID', '_custom_icon_attachment_id' );
 define( 'CUSTOM_ICONS_META_SLUG', '_custom_icon_slug' );
 define( 'CUSTOM_ICONS_NAMESPACE', 'custom-icons/v1' );
 define( 'CUSTOM_ICONS_ICON_PREFIX', 'custom-icons/' );
+define( 'CUSTOM_ICONS_MANAGE_CAP', 'switch_themes' );
+define( 'CUSTOM_ICONS_EDITOR_CAP', 'edit_posts' );
 
 require_once CUSTOM_ICONS_DIR . 'includes/post-type.php';
 require_once CUSTOM_ICONS_DIR . 'includes/meta.php';

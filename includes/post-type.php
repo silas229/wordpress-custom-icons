@@ -37,8 +37,24 @@ function custom_icons_register_post_type() {
 			'hierarchical'      => false,
 			'menu_position'     => null,
 			'supports'          => array( 'title' ),
-			'capability_type'   => 'post',
-			'map_meta_cap'      => true,
+			'capability_type'   => array( 'custom_icon', 'custom_icons' ),
+			'capabilities'      => array(
+				'edit_post'              => CUSTOM_ICONS_MANAGE_CAP,
+				'read_post'              => CUSTOM_ICONS_MANAGE_CAP,
+				'delete_post'            => CUSTOM_ICONS_MANAGE_CAP,
+				'edit_posts'             => CUSTOM_ICONS_MANAGE_CAP,
+				'edit_others_posts'      => CUSTOM_ICONS_MANAGE_CAP,
+				'publish_posts'          => CUSTOM_ICONS_MANAGE_CAP,
+				'read_private_posts'     => CUSTOM_ICONS_MANAGE_CAP,
+				'delete_posts'           => CUSTOM_ICONS_MANAGE_CAP,
+				'delete_private_posts'   => CUSTOM_ICONS_MANAGE_CAP,
+				'delete_published_posts' => CUSTOM_ICONS_MANAGE_CAP,
+				'delete_others_posts'    => CUSTOM_ICONS_MANAGE_CAP,
+				'edit_private_posts'     => CUSTOM_ICONS_MANAGE_CAP,
+				'edit_published_posts'   => CUSTOM_ICONS_MANAGE_CAP,
+				'create_posts'           => CUSTOM_ICONS_MANAGE_CAP,
+			),
+			'map_meta_cap'      => false,
 		)
 	);
 }

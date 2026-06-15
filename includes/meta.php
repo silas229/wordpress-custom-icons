@@ -14,7 +14,7 @@ function custom_icons_register_meta() {
 			'show_in_rest'      => false,
 			'sanitize_callback' => 'absint',
 			'auth_callback'     => function() {
-				return current_user_can( 'edit_posts' );
+				return current_user_can( CUSTOM_ICONS_MANAGE_CAP );
 			},
 		)
 	);
@@ -28,7 +28,7 @@ function custom_icons_register_meta() {
 			'show_in_rest'      => false,
 			'sanitize_callback' => 'sanitize_title',
 			'auth_callback'     => function() {
-				return current_user_can( 'edit_posts' );
+				return current_user_can( CUSTOM_ICONS_MANAGE_CAP );
 			},
 		)
 	);
