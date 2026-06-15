@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Custom Icons
  * Description: Adds a "Custom Icons" admin screen under Design and registers SVG icons for the core/icon block from Media Library attachments.
- * Version: 0.4.0
+ * Version: 0.5.0
  * Author: silas229
  * Text Domain: custom-icons
  */
@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'CUSTOM_ICONS_VERSION', '0.4.0' );
+define( 'CUSTOM_ICONS_VERSION', '0.5.0' );
 define( 'CUSTOM_ICONS_FILE', __FILE__ );
 define( 'CUSTOM_ICONS_DIR', plugin_dir_path( __FILE__ ) );
 define( 'CUSTOM_ICONS_URL', plugin_dir_url( __FILE__ ) );
@@ -31,6 +31,7 @@ require_once CUSTOM_ICONS_DIR . 'includes/admin.php';
 require_once CUSTOM_ICONS_DIR . 'includes/registry.php';
 require_once CUSTOM_ICONS_DIR . 'includes/rest.php';
 require_once CUSTOM_ICONS_DIR . 'includes/upload.php';
+require_once CUSTOM_ICONS_DIR . 'includes/icon-links.php';
 
 add_action( 'init', 'custom_icons_register_post_type' );
 add_action( 'init', 'custom_icons_register_meta' );
@@ -43,3 +44,4 @@ add_action( 'save_post_' . CUSTOM_ICONS_POST_TYPE, 'custom_icons_save_post', 10,
 
 add_filter( 'upload_mimes', 'custom_icons_allow_svg_uploads' );
 add_filter( 'wp_check_filetype_and_ext', 'custom_icons_fix_svg_filetype', 10, 4 );
+add_filter( 'render_block_core/icon', 'custom_icons_render_linked_icon_block', 10, 2 );

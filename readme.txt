@@ -5,7 +5,7 @@ Tags: block-editor, gutenberg, icons, svg, media-library
 Requires at least: 6.6
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 0.4.0
+Stable tag: 0.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,6 +24,7 @@ Features include:
 * Optional custom slugs for icon names
 * Registration of icons for use with the `core/icon` block
 * Editor integration so custom icons can be discovered in the block editor
+* Link support for the `core/icon` block via inspector controls
 
 Icons are registered with names like:
 
@@ -51,7 +52,15 @@ Only users with the `switch_themes` capability can view and manage Custom Icons.
 
 Yes. The plugin adds SVG to the allowed Media Library upload types so SVG icons can be uploaded and selected directly.
 
+= Can I add links to Icon blocks? =
+
+Yes. The plugin adds link settings for the `core/icon` block in the inspector controls.
+
 == Changelog ==
+
+= 0.5.0 =
+* Added inspector control link support for the `core/icon` block.
+* Rendered linked icon blocks with anchor tags on the frontend.
 
 = 0.4.0 =
 * Enabled SVG uploads in the Media Library by allow-listing SVG files.
